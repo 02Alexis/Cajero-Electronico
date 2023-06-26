@@ -40,7 +40,7 @@ let availableMoney = [
 //------------------------------------------- other------
 const validation = () => {
     let validation = true;
-    let user = []
+    let user = {};
     while (validation){
         const documentUser = parseInt(prompt("Please enter your document "))
         const passwoordUser = prompt("Please enter your password ");
@@ -81,7 +81,7 @@ const moneyToDeposit = (availableMoney, user) =>{  //open admin
 
         if(sumTotal == 0){
             console.log("cashier in maintenance, Come back soon");
-        }else if(sumTotal != 0){
+        }else if(sumTotal > 0){
             alert("let's withdraw money");
             let amountToWithdraw = parseInt(prompt("Please enter the amount to withdraw "));
             alert(`You are about to withdraw ${amountToWithdraw}`);
@@ -94,8 +94,8 @@ const moneyToDeposit = (availableMoney, user) =>{  //open admin
                 let amountToDeliver = 0;
                 availableMoney.forEach(element => {
                     const necessaryMoney = Math.floor(amountToWithdraw/element.denomination);
-                    if (necessaryMoney < element.quantity) {
-                        if (amountToWithdraw > element.denomination * necessaryMoney) {
+                    if (necessaryMoney <= element.quantity) {
+                        if (amountToWithdraw >= element.denomination * necessaryMoney) {
                             amountToWithdraw -= element.denomination * necessaryMoney;
                             element.quantity -= necessaryMoney;
                             amountToDeliver += element.denomination = necessaryMoney;
